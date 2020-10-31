@@ -60,7 +60,7 @@ function renderProducts() {
   imgOneEl.alt = products[productOne].name;
   products[productOne].views++;
 
-  imgTwoEl.src = productss[productTwo].src;
+  imgTwoEl.src = products[productTwo].src;
   imgTwoEl.alt = products[productTwo].name;
   products[productTwo].views++;
 }
