@@ -2,11 +2,12 @@
 
 // Global Variables
 var products = [];
-var totalClicksAllowed = 10;
+var totalClicksAllowed = 25;
 var clicks = 0;
 var myContainer = document.getElementById('container');
 var imgOneEl = document.getElementById('image-one');
 var imgTwoEl = document.getElementById('image-two');
+var imgThreeEl = document.getElementById('image-three');
 var myList = document.getElementById('list');
 
 // Constructor
@@ -46,27 +47,40 @@ new Product('usb');
 // console.log(getRandomProductIndex());
 
 function renderProducts() {
-  var productOne = getRandomProductIndex(); // this is an INDEX
-  var productTwo = getRandomProductIndex(); // this is an INDEX
+  var productIndexes = [];
+
+  // var productOne = getRandomProductIndex(); // this is an INDEX
+  // var productTwo = getRandomProductIndex(); // this is an INDEX
   // ?? var ProductThree = getRandomProductIndex(); // this is an INDEX 
 
   //with three indexes this gets more complex!!!  maybe use an array, maybe see if the index in question is included in that array, if it is, choose another index
   //NOTE:  we've myArray.push.  how do you remove something from an array?  how do we add something to the FRONT of an array?  remove from the FRONT, how remove from the BACK?
-  while (productOne === productTwo) {
-    productTwo = getRandomProductIndex();
+  // while (productOne === productTwo) {
+  //   productTwo = getRandomProductIndex();
+  // }
+
+  while (productIndexes.length < 3) {
+    var randomNumber = getRandomProductIndex();
+    if (!productIndexes.includes(randomNumber)) {
+      productIndexes.push(randomNumber);
+    }
   }
 
-  imgOneEl.src = products[productOne].src;
-  imgOneEl.alt = products[productOne].name;
-  products[productOne].views++;
+  imgOneEl.src = products[productIndexes[0]].src;
+  imgOneEl.alt = products[productIndexes[0]].name;
+  products[productIndexes[0]].views++;
 
-  imgTwoEl.src = products[productTwo].src;
-  imgTwoEl.alt = products[productTwo].name;
-  products[productTwo].views++;
+  imgTwoEl.src = products[productIndexes[1]].src;
+  imgTwoEl.alt = products[productIndexes[1]].name;
+  products[productIndexes[1]].views++;
+
+  imgThreeEl.src = products[productIndexes[2]].src;
+  imgThreeEl.alt = products[productIndexes[2]].name;
+  products[productIndexes[2]].views++;
 }
 
-function renderResults(){
-  for (var i = 0; i < products.length; i++){
+function renderResults() {
+  for (var i = 0; i < products.length; i++) {
     // create element
     var li = document.createElement('li');
     // give it content
@@ -100,7 +114,7 @@ function handleClick(event) {
     renderResults();
   }
 
-   // console.log(clickedProduct);
+  // console.log(clickedProduct);
 }
 
 // Event Listener Takes 2 Parameters: Event and CallBack Function
