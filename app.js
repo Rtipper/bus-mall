@@ -66,14 +66,17 @@ function renderProducts() {
     }
   }
 
+  //Imge One
   imgOneEl.src = products[productIndexes[0]].src;
   imgOneEl.alt = products[productIndexes[0]].name;
   products[productIndexes[0]].views++;
 
+  //Imge Two
   imgTwoEl.src = products[productIndexes[1]].src;
   imgTwoEl.alt = products[productIndexes[1]].name;
   products[productIndexes[1]].views++;
 
+  //Imge Three
   imgThreeEl.src = products[productIndexes[2]].src;
   imgThreeEl.alt = products[productIndexes[2]].name;
   products[productIndexes[2]].views++;

@@ -15,5 +15,9 @@ section {
 
 img {
   width: 300px;
+  height: 300px;
+  margin-top: 150px;
+  margin-left: 140px;
+  border: 4px solid black;
 }
 
