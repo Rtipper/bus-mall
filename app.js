@@ -4,11 +4,17 @@
 var products = [];
 var totalClicksAllowed = 25;
 var clicks = 0;
+var votesArray = []
+var viewsArray = []
+var namesArray = []
+
 var myContainer = document.getElementById('container');
 var imgOneEl = document.getElementById('image-one');
 var imgTwoEl = document.getElementById('image-two');
 var imgThreeEl = document.getElementById('image-three');
 var myList = document.getElementById('list');
+var ctx = document.getElementById('myChart').getContext('2d');
+
 
 // Constructor
 function Product(name) {
@@ -58,6 +64,10 @@ function renderProducts() {
   // while (productOne === productTwo) {
   //   productTwo = getRandomProductIndex();
   // }
+  // Lab 12 3 varying images ideas
+  // [a, b, c, d]  1st time
+  //  [a, b, e, f]  or [e, f, a, b]  2nd time
+  // [e, f, g, c]  or [g, c, e, f] 3rd time
 
   while (productIndexes.length < 3) {
     var randomNumber = getRandomProductIndex();
@@ -114,11 +124,60 @@ function handleClick(event) {
     // Remove Even Listener Takes Parameters: Event and Callback Function
     myContainer.removeEventListener('click', handleClick);
     // Renders Results in a List
-    renderResults();
+    renderChart();
+    // renderResults();
   }
-
-  // console.log(clickedProduct);
 }
+
+// console.log(clickedProduct);
+
+function getData() {
+  for (var i = 0; i < products.length; i++) {
+    votesArray.push(products[i].votes);
+    viewsArray.push(products[i].views);
+    namesArray.push(products[i].name);
+  }
+}
+
+
+function renderChart() {
+  getData();
+  var chartObject = {
+    type: 'bar',
+    data: {
+      labels: namesArray,
+      datasets: [{
+        label: '# of VOTES',
+        hoverBackgroundColor: 'rgba(255, 99, 71, 0.2)',
+        data: votesArray,
+        backgroundColor: 'rgba(255, 99, 71, 0.4)',
+        borderColor: 'rgba(255, 255, 255, 1)',
+        borderWidth: 2
+      },
+      {
+        label: '# of VIEWS',
+        data: viewsArray,
+        backgroundColor: 'rgba(255, 99, 71, 0.8)',
+        borderColor: 'rgba(255, 255, 255, 1)',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  };
+
+
+  var myChart = new Chart(ctx, chartObject);  //eslint-disable-line
+
+}
+
 
 // Event Listener Takes 2 Parameters: Event and CallBack Function
 myContainer.addEventListener('click', handleClick);
