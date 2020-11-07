@@ -31,25 +31,33 @@ function getRandomProductIndex() {
   return Math.floor(Math.random() * products.length);
 }
 
-//Executable Code (Images in IMG FOLDER)
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('usb');
+// Local Storage pt1
+var retrievedResults = localStorage.getItem('productResults');
+if (retrievedResults) {
+  var parsedRetrievedResults = JSON.parse(retrievedResults);
+  products = parsedRetrievedResults;
+} else {
+
+  //Executable Code (Images in IMG FOLDER) -- these are now part of local storage!
+  new Product('bag');
+  new Product('banana');
+  new Product('bathroom');
+  new Product('boots');
+  new Product('breakfast');
+  new Product('bubblegum');
+  new Product('chair');
+  new Product('cthulhu');
+  new Product('dog-duck');
+  new Product('dragon');
+  new Product('pen');
+  new Product('pet-sweep');
+  new Product('scissors');
+  new Product('shark');
+  new Product('sweep');
+  new Product('tauntaun');
+  new Product('unicorn');
+  new Product('usb');
+}
 
 // console.log(getRandomProductIndex());
 
@@ -134,6 +142,10 @@ function handleClick(event) {
     // Renders Results in a List
     renderChart();
     // renderResults();
+
+    // Local Storage pt2 - Saving the Data
+    var stringifiedResults = JSON.stringify(products);
+    localStorage.setItem('productResults', stringifiedResults);
   }
 }
 
